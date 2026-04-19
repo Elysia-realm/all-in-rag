@@ -1,12 +1,20 @@
 from unstructured.partition.auto import partition
+from unstructured.partition.pdf import partition_pdf
 
 # PDF文件路径
 pdf_path = "../../data/C2/pdf/rag.pdf"
 
 # 使用Unstructured加载并解析PDF文档
-elements = partition(
+# elements = partition(
+#    filename=pdf_path,
+#    content_type="application/pdf"
+# )
+
+# 使用partition_pdf解析，需要conda安装poppler和tesseract
+elements = partition_pdf(
     filename=pdf_path,
-    content_type="application/pdf"
+    # strategy="hi_res"
+    strategy="ocr_only"
 )
 
 # 打印解析结果
