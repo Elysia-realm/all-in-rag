@@ -28,7 +28,9 @@ loaded_vectorstore = FAISS.load_local(
 )
 
 # 执行相似性搜索
-query = "FAISS是做什么的？"
+# query = "FAISS是做什么的？"
+# query = "llamaIndex是什么？"
+query ="langchian是什么？"
 results = loaded_vectorstore.similarity_search(query, k=1)
 
 print(f"\n查询: '{query}'")
