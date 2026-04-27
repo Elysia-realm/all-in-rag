@@ -126,7 +126,9 @@ print("已加载 Collection 到内存中。")
 # 7. 执行多模态检索
 print(f"\n--> 正在 '{COLLECTION_NAME}' 中执行检索")
 query_image_path = os.path.join(DATA_DIR, "dragon", "query.png")
-query_text = "一条龙"
+# query_image_path = os.path.join(DATA_DIR, "dragon", "other01.png")
+# query_text = "一条狗" 
+query_text = "没牙仔"
 query_vector = encoder.encode_query(image_path=query_image_path, text=query_text)
 
 search_results = milvus_client.search(
