@@ -7,11 +7,17 @@ from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.vector_stores import MetadataFilters, ExactMatchFilter
 from llama_index.llms.deepseek import DeepSeek
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.openai_like import OpenAILike
 
 load_dotenv()
 
 # 配置模型
-Settings.llm = DeepSeek(model="deepseek-chat", api_key=os.getenv("DEEPSEEK_API_KEY"))
+Settings.llm = OpenAILike(
+    model="gpt-4.1-mini-free",
+    api_key=os.getenv("AIHUBMIX_API_KEY"),
+    api_base="https://aihubmix.com/v1",
+    is_chat_model=True
+)
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh-v1.5")
 
 # 1. 加载和预处理数据
@@ -95,7 +101,7 @@ def query_safe_recursive(query_str):
     return response
 
 # 4. 执行查询
-query = "1994年评分人数最少的电影是哪一部？"
+query = "2002年评分人数最少的电影是哪一部？"
 response = query_safe_recursive(query)
 
 print(f"最终回答: {response}")

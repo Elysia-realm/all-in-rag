@@ -9,11 +9,17 @@ from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.llms.deepseek import DeepSeek
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import Settings
+from llama_index.llms.openai_like import OpenAILike
 
 load_dotenv()
 
 # 配置模型
-Settings.llm = DeepSeek(model="deepseek-chat", api_key=os.getenv("DEEPSEEK_API_KEY"))
+Settings.llm = OpenAILike(
+    model="gpt-4.1-mini-free",
+    api_key=os.getenv("AIHUBMIX_API_KEY"),
+    api_base="https://aihubmix.com/v1",
+    is_chat_model=True
+)
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh-v1.5")
 
 # 1.加载数据并为每个工作表创建查询引擎和摘要节点
